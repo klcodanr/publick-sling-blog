@@ -25,6 +25,5 @@
         <!-- /.dropdown -->
     </ul>
     <!-- /.navbar-top-links -->
-
     <sling:call script="sidebar.jsp" />
 </nav>
