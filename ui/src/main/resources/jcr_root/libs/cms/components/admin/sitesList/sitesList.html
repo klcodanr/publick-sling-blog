@@ -1,0 +1,22 @@
+<div data-ng-controller="SiteController" class="site-controller">
+
+  <ol class="breadcrumb">
+    <li data-ng-repeat="crumb in breadcrumbs track by $index" data-ng-class="{'active' : $last}">
+      <a href="#" data-ng-if="!$last" data-ng-click="navigate($index, true)">{{crumb}}</a>
+      <span data-ng-if="$last">{{crumb}}</span>
+    </li>
+  </ol>
+
+  <div class="row">
+
+    <div class="col-xs-6 col-sm-4 col-md-2" data-ng-repeat="site in sites | orderBy">
+      <a class="thumbnail asset-thumbnail asset-folder" data-ng-click="navigate(site)">
+        <i class="fa fa-sitemap"></i>
+        <div class="caption">
+          <h6>{{site}}</h6>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</div>

@@ -1,19 +1,19 @@
 {
     "jcr:primaryType": "publick:page",
-    "sling:resourceType" : "publick/pages/basicPage",
+    "sling:resourceType" : "cms/pages/basicPage",
     "title" : "Blog List",
     "jcr:content" : {
         "mainContent" : {
             "jcr:primaryType": "nt:unstructured",
-            "sling:resourceType" : "publick/components/foundation/parsys",
+            "sling:resourceType" : "cms/components/foundation/parsys",
             "blogList" : {
                 "jcr:primaryType": "nt:unstructured",
-                "sling:resourceType" : "publick/components/foundation/blogList",
+                "sling:resourceType" : "cms/components/foundation/blogList",
                 "pageSize": 5
             },
             "pagination" : {
                 "jcr:primaryType": "nt:unstructured",
-                "sling:resourceType" : "publick/components/foundation/blogPagination",
+                "sling:resourceType" : "cms/components/foundation/blogPagination",
                 "pageSize": 5
             }
         }

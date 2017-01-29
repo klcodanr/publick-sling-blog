@@ -1,0 +1,15 @@
+{
+    "jcr:primaryType": "publick:page",
+    "sling:resourceType" : "cms/pages/adminSecurePage",
+    "title" : "Sites",
+    "jcr:content" : {
+        "mainContent" : {
+            "jcr:primaryType": "nt:unstructured",
+            "sling:resourceType" : "cms/components/foundation/parsys",
+            "sitesList" : {
+                "jcr:primaryType": "nt:unstructured",
+                "sling:resourceType" : "cms/components/admin/sitesList"
+            }
+        }
+    }
+}

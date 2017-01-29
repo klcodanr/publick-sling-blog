@@ -129,7 +129,7 @@ public class PublickConstants {
     /**
      * Page base resource type.
      */
-    private static final String PAGE_TYPE = "publick/pages";
+    private static final String PAGE_TYPE = "cms/pages";
 
     /**
      * Admin page resource type.
