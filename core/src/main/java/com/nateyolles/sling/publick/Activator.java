@@ -14,6 +14,9 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import co.essomenic.cms.CMSConstants;
+
 import org.apache.jackrabbit.JcrConstants;
 import org.apache.jackrabbit.api.JackrabbitSession;
 import org.apache.jackrabbit.api.security.JackrabbitAccessControlList;
@@ -72,8 +75,8 @@ public class Activator implements BundleActivator {
      * @param bundleContext The bundle context provided by the component.
      */
     private void setPermissions(BundleContext bundleContext) {
-       setWritable(bundleContext, PublickConstants.BLOG_PATH);
-       setWritable(bundleContext, PublickConstants.ASSET_PATH);
+       setWritable(bundleContext, CMSConstants.BLOG_PATH);
+       setWritable(bundleContext, CMSConstants.ASSET_PATH);
     }
 
     /**
@@ -134,7 +137,7 @@ public class Activator implements BundleActivator {
                     JackrabbitSession session = (JackrabbitSession)resolver.adaptTo(Session.class);
                     JackrabbitAccessControlManager accessControlManager = (JackrabbitAccessControlManager)session.getAccessControlManager();
 
-                    Group user = (Group)session.getUserManager().getAuthorizable(PublickConstants.GROUP_ID_AUTHORS);
+                    Group user = (Group)session.getUserManager().getAuthorizable(CMSConstants.GROUP_ID_AUTHORS);
                     Principal principal = user.getPrincipal();
 
                     Privilege[] privileges = new Privilege[] {
@@ -186,18 +189,18 @@ public class Activator implements BundleActivator {
                     UserManager userManager = ((JackrabbitSession)session).getUserManager();
                     ValueFactory valueFactory = session.getValueFactory();
 
-                    Authorizable authors = userManager.getAuthorizable(PublickConstants.GROUP_ID_AUTHORS);
+                    Authorizable authors = userManager.getAuthorizable(CMSConstants.GROUP_ID_AUTHORS);
 
                     if (authors == null) {
-                        authors = userManager.createGroup(PublickConstants.GROUP_ID_AUTHORS);
-                        authors.setProperty(GROUP_DISPLAY_NAME, valueFactory.createValue(PublickConstants.GROUP_DISPLAY_AUTHORS));
+                        authors = userManager.createGroup(CMSConstants.GROUP_ID_AUTHORS);
+                        authors.setProperty(GROUP_DISPLAY_NAME, valueFactory.createValue(CMSConstants.GROUP_DISPLAY_AUTHORS));
                     }
 
-                    Authorizable testers = userManager.getAuthorizable(PublickConstants.GROUP_ID_TESTERS);
+                    Authorizable testers = userManager.getAuthorizable(CMSConstants.GROUP_ID_TESTERS);
 
                     if (testers == null) {
-                        testers = userManager.createGroup(PublickConstants.GROUP_ID_TESTERS);
-                        testers.setProperty(GROUP_DISPLAY_NAME, valueFactory.createValue(PublickConstants.GROUP_DISPLAY_TESTERS));
+                        testers = userManager.createGroup(CMSConstants.GROUP_ID_TESTERS);
+                        testers.setProperty(GROUP_DISPLAY_NAME, valueFactory.createValue(CMSConstants.GROUP_DISPLAY_TESTERS));
                     }
                 }
             } catch (RepositoryException e) {

@@ -22,8 +22,9 @@ import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nateyolles.sling.publick.PublickConstants;
 import com.nateyolles.sling.publick.services.SystemSettingsService;
+
+import co.essomenic.cms.CMSConstants;
 
 /**
  * System settings configuration to save blog engine settings
@@ -62,7 +63,7 @@ public class SystemSettingsServiceImpl implements SystemSettingsService {
         try {
             resolver = resourceResolverFactory.getAdministrativeResourceResolver(null);
 
-            systemConfigNode = JcrResourceUtil.createPath(PublickConstants.CONFIG_SYSTEM_PATH, NodeType.NT_UNSTRUCTURED, NodeType.NT_UNSTRUCTURED, resolver.adaptTo(Session.class), true);
+            systemConfigNode = JcrResourceUtil.createPath(CMSConstants.CONFIG_SYSTEM_PATH, NodeType.NT_UNSTRUCTURED, NodeType.NT_UNSTRUCTURED, resolver.adaptTo(Session.class), true);
         } catch (LoginException e) {
             LOGGER.error("Could not get resource resolver.", e);
         } catch (RepositoryException e) {

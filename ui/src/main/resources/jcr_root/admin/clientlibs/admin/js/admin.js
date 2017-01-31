@@ -45,7 +45,7 @@ app.controller('KeywordsController', function($scope){
 app.controller('AssetController', function($scope, $http, Upload) {
 
     $scope.breadcrumbs = ['assets'];
-    $scope.currentPath = '/content/assets';
+    $scope.currentPath = '';
     $scope.folders = [];
     $scope.assets = [];
 
@@ -68,7 +68,7 @@ app.controller('AssetController', function($scope, $http, Upload) {
         $scope.breadcrumbs.push(folder);
       }
 
-      $scope.currentPath = '/content/' + $scope.breadcrumbs.join('/');
+      $scope.currentPath = $('.base-path').val() + $scope.breadcrumbs.join('/');
       update($scope.currentPath);
     };
 
@@ -85,7 +85,7 @@ app.controller('AssetController', function($scope, $http, Upload) {
         for (var i = 0; i < files.length; i++) {
           var file = files[i];
           Upload.upload({
-            url: '/bin/admin/uploadfile',
+            url: '/admin/bin/uploadfile',
             file: file,
             fields: {'path' : $scope.currentPath},
             sendFieldsAs: 'form'
@@ -93,7 +93,7 @@ app.controller('AssetController', function($scope, $http, Upload) {
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
             console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
           }).success(function (data, status, headers, config) {
-            console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+            console.log('file ' + config.file.name + ' uploaded. Response: ' + JSON.stringify(data));
             $scope.assets.push(file.name);
           });
         }
@@ -105,6 +105,7 @@ app.controller('AssetController', function($scope, $http, Upload) {
         .success(function(data, status, headers, config) { 
           $scope.folders = [];
           $scope.assets = [];
+          $('input[name=path]').val(path);
 
           angular.forEach(data, function(value, key){
             if (!(new RegExp(/^(sling|jcr|rep):/).test(key))) {
@@ -121,7 +122,9 @@ app.controller('AssetController', function($scope, $http, Upload) {
         });
     }
 
-    update('/content/assets');
+    var path = $('.base-path').val();
+    $scope.currentPath = path;
+    update(path);
 });
 
 
@@ -130,25 +133,6 @@ app.controller('SiteController', function($scope, $http, Upload) {
     $scope.breadcrumbs = ['sites'];
     $scope.currentPath = '/content';
     $scope.sites = [];
-
-    $scope.navigate = function(site) {
-      $scope.selectedAsset = null;
-
-      if (isRelative) {
-        if (folder === -1) {
-          $scope.breadcrumbs.pop();
-        } else {
-          for (var x = folder - $scope.breadcrumbs.length + 1; x < 0; x++) {
-            $scope.breadcrumbs.pop();
-          }
-        }
-      } else {
-        $scope.breadcrumbs.push(folder);
-      }
-
-      $scope.currentPath = '/content/' + $scope.breadcrumbs.join('/');
-      update($scope.currentPath);
-    };
 
     function update(path) {
       $http.get(path + '.1.json')

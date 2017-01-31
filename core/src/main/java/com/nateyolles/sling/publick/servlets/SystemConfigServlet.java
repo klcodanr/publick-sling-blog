@@ -1,7 +1,8 @@
 package com.nateyolles.sling.publick.servlets;
 
-import com.nateyolles.sling.publick.PublickConstants;
 import com.nateyolles.sling.publick.services.SystemSettingsService;
+
+import co.essomenic.cms.CMSConstants;
 
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
@@ -25,7 +26,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Post servlet to save system config updates.
  */
-@SlingServlet(paths = PublickConstants.SERVLET_PATH_ADMIN + "/systemconfig")
+@SlingServlet(paths = CMSConstants.SERVLET_PATH_ADMIN + "/systemconfig")
 public class SystemConfigServlet extends SlingAllMethodsServlet {
 
     @Reference
@@ -55,6 +56,6 @@ public class SystemConfigServlet extends SlingAllMethodsServlet {
 
         systemSettingsService.setBlogName(blogName);
 
-        response.sendRedirect(PublickConstants.SYSTEM_CONFIG_PATH + ".html");
+        response.sendRedirect(CMSConstants.SYSTEM_CONFIG_PATH + ".html");
     }
 }

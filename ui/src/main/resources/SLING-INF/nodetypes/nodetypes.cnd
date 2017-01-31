@@ -1,25 +1,34 @@
 //  You can find out more documentation on this topic 
 //  by following these links:
 //
-//    -  http://sling.apache.org/site/content-loading.html
-//    -  http://jackrabbit.apache.org/node-type-notation.html
+//	-  http://sling.apache.org/site/content-loading.html
+//	-  http://jackrabbit.apache.org/node-type-notation.html
 
-<publick = 'http://www.nateyolles.com/publick/1.0'>
+<cms = 'http://www.essomenic.co/cms/1.0'>
 
-[publick:page] > nt:unstructured
-    - title (string)
-    - description (string)
-    - keywords (string)
-      multiple
-    - image (path)
-    - publishDate (date)
-    - visible (boolean)
-    - content (string)
 
-[publick:template] > nt:hierarchyNode
+[cms:site] > nt:hierarchyNode
+	orderable
+	- name (string)
+	- description (string)
+	- cms:created (date) autocreated
+	- cms:createdBy (string) autocreated
+	- jcr:lastModified (date) autocreated
+	- jcr:lastModifiedBy (string) autocreated
+	+ config (nt:base) = nt:unstructured copy primary
+	+ * (nt:base) = nt:base version
 
-[publick:component] > nt:unstructured
 
-[publick:comment] > nt:unstructured
-    - author (string)
-    - comment (string)
+[cms:page] > nt:unstructured
+	- title (string)
+	- cms:created (date) autocreated
+	- cms:createdBy (string) autocreated
+	- jcr:lastModified (date) autocreated
+	- jcr:lastModifiedBy (string) autocreated
+	- published (boolean)
+	+ jcr:content (nt:base) = nt:unstructured copy primary
+	+ * (nt:base) = nt:base version
+
+[cms:template] > nt:hierarchyNode
+
+[cms:component] > nt:unstructured

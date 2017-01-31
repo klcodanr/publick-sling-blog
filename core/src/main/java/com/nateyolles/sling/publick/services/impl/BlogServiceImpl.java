@@ -22,8 +22,9 @@ import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nateyolles.sling.publick.PublickConstants;
 import com.nateyolles.sling.publick.services.BlogService;
+
+import co.essomenic.cms.CMSConstants;
 
 @Service( value = BlogService.class )
 @Component( metatype = true, immediate = true )
@@ -39,10 +40,10 @@ public class BlogServiceImpl implements BlogService {
      */
     private static final String BLOG_QUERY = String.format("SELECT * FROM [%s] AS s WHERE "
             + "ISDESCENDANTNODE([%s]) AND s.[%s] = '%s' ORDER BY [%s] desc",
-            PublickConstants.NODE_TYPE_PAGE,
-            PublickConstants.BLOG_PATH,
+            CMSConstants.NODE_TYPE_PAGE,
+            CMSConstants.BLOG_PATH,
             JcrResourceConstants.SLING_RESOURCE_TYPE_PROPERTY,
-            PublickConstants.PAGE_TYPE_BLOG,
+            CMSConstants.PAGE_TYPE_BLOG,
             JcrConstants.JCR_CREATED);
 
     /**

@@ -28,8 +28,9 @@ import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nateyolles.sling.publick.PublickConstants;
 import com.nateyolles.sling.publick.services.RecaptchaService;
+
+import co.essomenic.cms.CMSConstants;
 
 /**
  * reCAPTCHA service to get keys and communicate with Google
@@ -192,7 +193,7 @@ public class RecaptchaServiceImpl implements RecaptchaService {
             resolver = resourceResolverFactory.getAdministrativeResourceResolver(null);
 
             if (resolver != null) {
-                Resource recaptcha = resolver.getResource(PublickConstants.CONFIG_RECAPTCHA_PATH);
+                Resource recaptcha = resolver.getResource(CMSConstants.CONFIG_RECAPTCHA_PATH);
 
                 if (recaptcha != null) {
                     ValueMap properties = recaptcha.adaptTo(ValueMap.class);

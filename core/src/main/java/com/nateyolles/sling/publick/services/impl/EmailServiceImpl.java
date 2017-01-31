@@ -22,8 +22,9 @@ import org.osgi.service.component.ComponentContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nateyolles.sling.publick.PublickConstants;
 import com.nateyolles.sling.publick.services.EmailService;
+
+import co.essomenic.cms.CMSConstants;
 
 /**
  * Email service to get save email configurations.
@@ -61,7 +62,7 @@ public class EmailServiceImpl implements EmailService {
         try {
             resolver = resourceResolverFactory.getAdministrativeResourceResolver(null);
 
-            emailConfigNode = JcrResourceUtil.createPath(PublickConstants.CONFIG_EMAIL_PATH, NodeType.NT_UNSTRUCTURED, NodeType.NT_UNSTRUCTURED, resolver.adaptTo(Session.class), true);
+            emailConfigNode = JcrResourceUtil.createPath(CMSConstants.CONFIG_EMAIL_PATH, NodeType.NT_UNSTRUCTURED, NodeType.NT_UNSTRUCTURED, resolver.adaptTo(Session.class), true);
         } catch (LoginException e) {
             LOGGER.error("Could not get resource resolver.", e);
         } catch (RepositoryException e) {

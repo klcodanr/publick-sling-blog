@@ -1,4 +1,4 @@
 {
-    "jcr:primaryType" : "publick:component",
+    "jcr:primaryType" : "cms:component",
     "sling:resourceSuperType" : "cms/pages/basicPage"
 }

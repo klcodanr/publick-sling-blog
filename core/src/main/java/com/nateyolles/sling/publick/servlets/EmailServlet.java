@@ -1,8 +1,9 @@
 package com.nateyolles.sling.publick.servlets;
 
-import com.nateyolles.sling.publick.PublickConstants;
 import com.nateyolles.sling.publick.services.EmailService;
 import com.nateyolles.sling.publick.services.RecaptchaService;
+
+import co.essomenic.cms.CMSConstants;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.felix.scr.annotations.Reference;
@@ -26,7 +27,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-@SlingServlet(paths = PublickConstants.SERVLET_PATH_PUBLIC + "/sendmail")
+@SlingServlet(paths = CMSConstants.SERVLET_PATH_PUBLIC + "/sendmail")
 public class EmailServlet extends SlingAllMethodsServlet {
 
     /**

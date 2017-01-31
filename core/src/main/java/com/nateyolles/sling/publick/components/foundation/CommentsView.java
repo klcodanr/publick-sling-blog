@@ -19,7 +19,7 @@ import org.apache.sling.scripting.sightly.pojo.Use;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nateyolles.sling.publick.PublickConstants;
+import co.essomenic.cms.CMSConstants;
 
 /**
  * Backing for Sightly CommentsView component. Returns collection of comments
@@ -69,7 +69,7 @@ public class CommentsView implements Use {
         blogResource = (Resource)bindings.get(SlingBindings.RESOURCE);
         resolver = blogResource.getResourceResolver();
 
-        Resource commentsResource = resolver.getResource(blogResource.getPath().replace(PublickConstants.BLOG_PATH, PublickConstants.COMMENTS_PATH));
+        Resource commentsResource = resolver.getResource(blogResource.getPath().replace(CMSConstants.BLOG_PATH, CMSConstants.COMMENTS_PATH));
         comments = getCommentList(commentsResource, true);
     }
 

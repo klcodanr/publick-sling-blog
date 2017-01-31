@@ -1,7 +1,5 @@
 package com.nateyolles.sling.publick.servlets;
 
-import com.nateyolles.sling.publick.PublickConstants;
-
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.resource.PersistenceException;
 import org.apache.sling.api.resource.Resource;
@@ -20,10 +18,12 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import co.essomenic.cms.CMSConstants;
+
 /**
  * Post servlet to save reCAPTCHA config updates.
  */
-@SlingServlet(paths = PublickConstants.SERVLET_PATH_ADMIN + "/recaptchaconfig")
+@SlingServlet(paths = CMSConstants.SERVLET_PATH_ADMIN + "/recaptchaconfig")
 public class RecaptchaConfigServlet extends SlingAllMethodsServlet {
 
     /**
@@ -67,7 +67,7 @@ public class RecaptchaConfigServlet extends SlingAllMethodsServlet {
 
         try {
             resolver = request.getResourceResolver();
-            Resource recaptcha = resolver.getResource(PublickConstants.CONFIG_RECAPTCHA_PATH);
+            Resource recaptcha = resolver.getResource(CMSConstants.CONFIG_RECAPTCHA_PATH);
 
             if (recaptcha != null) {
                 ModifiableValueMap properties = recaptcha.adaptTo(ModifiableValueMap.class);
@@ -78,6 +78,6 @@ public class RecaptchaConfigServlet extends SlingAllMethodsServlet {
             LOGGER.error("Could not save config settings.", e);
         }
 
-        response.sendRedirect(PublickConstants.RECAPTCHA_CONFIG_PATH + ".html");
+        response.sendRedirect(CMSConstants.RECAPTCHA_CONFIG_PATH + ".html");
     }
 }

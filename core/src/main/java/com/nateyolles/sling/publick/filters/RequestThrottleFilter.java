@@ -22,7 +22,7 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.nateyolles.sling.publick.PublickConstants;
+import co.essomenic.cms.CMSConstants;
 
 /**
  * Filter to throttle post requests
@@ -53,7 +53,7 @@ public class RequestThrottleFilter implements Filter {
         final String path = httpServletRequest.getPathInfo().toLowerCase();
         final String method = httpServletRequest.getMethod();
 
-        if ("POST".equals(method) && path.startsWith(PublickConstants.SERVLET_PATH_PUBLIC)) {
+        if ("POST".equals(method) && path.startsWith(CMSConstants.SERVLET_PATH_PUBLIC)) {
             synchronized (session.getId().intern()) {
                 LinkedBlockingDeque<Long> times = (LinkedBlockingDeque<Long>)session.getAttribute(TIMES);
 

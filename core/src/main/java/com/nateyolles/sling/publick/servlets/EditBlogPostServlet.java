@@ -1,7 +1,8 @@
 package com.nateyolles.sling.publick.servlets;
 
-import com.nateyolles.sling.publick.PublickConstants;
 import com.nateyolles.sling.publick.services.FileUploadService;
+
+import co.essomenic.cms.CMSConstants;
 
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
@@ -36,7 +37,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Servlet to save blog posts.
  */
-@SlingServlet(paths = PublickConstants.SERVLET_PATH_ADMIN + "/editblogpost")
+@SlingServlet(paths = CMSConstants.SERVLET_PATH_ADMIN + "/editblogpost")
 public class EditBlogPostServlet extends SlingAllMethodsServlet {
 
     /**
@@ -81,8 +82,8 @@ public class EditBlogPostServlet extends SlingAllMethodsServlet {
         final long month = Long.parseLong(request.getParameter("month"));
         final long year = Long.parseLong(request.getParameter("year"));
         final String path = String.format(BLOG_PATH, year, month);
-        final String blogPath = PublickConstants.BLOG_PATH + path + "/" + url;
-        String image = fileUploadService.uploadFile(request, PublickConstants.IMAGE_PATH);
+        final String blogPath = CMSConstants.BLOG_PATH + path + "/" + url;
+        String image = fileUploadService.uploadFile(request, CMSConstants.IMAGE_PATH);
 
         Resource existingNode = resolver.getResource(blogPath);
 
@@ -91,8 +92,8 @@ public class EditBlogPostServlet extends SlingAllMethodsServlet {
         }
 
         Map<String, Object> properties = new HashMap<String, Object>();
-        properties.put(JcrConstants.JCR_PRIMARYTYPE, PublickConstants.NODE_TYPE_PAGE);
-        properties.put(JcrResourceConstants.SLING_RESOURCE_TYPE_PROPERTY, PublickConstants.PAGE_TYPE_BLOG);
+        properties.put(JcrConstants.JCR_PRIMARYTYPE, CMSConstants.NODE_TYPE_PAGE);
+        properties.put(JcrResourceConstants.SLING_RESOURCE_TYPE_PROPERTY, CMSConstants.PAGE_TYPE_BLOG);
         properties.put("title", title);
         properties.put("visible", visible);
         properties.put("content", content);
@@ -121,7 +122,7 @@ public class EditBlogPostServlet extends SlingAllMethodsServlet {
                 ModifiableValueMap existingProperties = existingNode.adaptTo(ModifiableValueMap.class);
                 existingProperties.putAll(properties);
             } else {
-                Node node = JcrResourceUtil.createPath(resolver.getResource(PublickConstants.CONTENT_PATH).adaptTo(Node.class), BLOG_ROOT + path, NodeType.NT_UNSTRUCTURED, NodeType.NT_UNSTRUCTURED, true);
+                Node node = JcrResourceUtil.createPath(resolver.getResource(CMSConstants.CONTENT_PATH).adaptTo(Node.class), BLOG_ROOT + path, NodeType.NT_UNSTRUCTURED, NodeType.NT_UNSTRUCTURED, true);
 
                 Resource blog = resolver.create(resolver.getResource(node.getPath()), url, properties);
                 Node blogNode = blog.adaptTo(Node.class);
@@ -131,7 +132,7 @@ public class EditBlogPostServlet extends SlingAllMethodsServlet {
             resolver.commit();
             resolver.close();
 
-            response.sendRedirect(PublickConstants.ADMIN_LIST_PATH + ".html");
+            response.sendRedirect(CMSConstants.ADMIN_LIST_PATH + ".html");
         } catch (RepositoryException e) {
             LOGGER.error("Could not save blog to repository.", e);
             response.sendRedirect(request.getHeader("referer"));

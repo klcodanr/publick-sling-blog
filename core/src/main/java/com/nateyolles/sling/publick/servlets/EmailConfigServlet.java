@@ -1,7 +1,8 @@
 package com.nateyolles.sling.publick.servlets;
 
-import com.nateyolles.sling.publick.PublickConstants;
 import com.nateyolles.sling.publick.services.EmailService;
+
+import co.essomenic.cms.CMSConstants;
 
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
@@ -19,7 +20,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Post servlet to save email config updates.
  */
-@SlingServlet(paths = PublickConstants.SERVLET_PATH_ADMIN + "/emailconfig")
+@SlingServlet(paths = CMSConstants.SERVLET_PATH_ADMIN + "/emailconfig")
 public class EmailConfigServlet extends SlingAllMethodsServlet {
 
     @Reference
@@ -83,7 +84,7 @@ public class EmailConfigServlet extends SlingAllMethodsServlet {
         emailService.setPort(port);
         emailService.setSmtpPassword(smtpPassword);
 
-        response.sendRedirect(PublickConstants.EMAIL_CONFIG_PATH + ".html");
+        response.sendRedirect(CMSConstants.EMAIL_CONFIG_PATH + ".html");
     }
 
     /**

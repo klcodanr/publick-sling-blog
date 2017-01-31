@@ -1,7 +1,8 @@
 package com.nateyolles.sling.publick.servlets;
 
-import com.nateyolles.sling.publick.PublickConstants;
 import com.nateyolles.sling.publick.services.RecaptchaService;
+
+import co.essomenic.cms.CMSConstants;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.felix.scr.annotations.Reference;
@@ -38,7 +39,7 @@ import org.slf4j.LoggerFactory;
  *
  * Comments can be nested two levels deep.
  */
-@SlingServlet(paths = PublickConstants.SERVLET_PATH_PUBLIC + "/addcomment")
+@SlingServlet(paths = CMSConstants.SERVLET_PATH_PUBLIC + "/addcomment")
 public class CommentServlet extends SlingAllMethodsServlet {
 
     /**
@@ -117,7 +118,7 @@ public class CommentServlet extends SlingAllMethodsServlet {
 
                 String parentPath = StringUtils.isNotBlank(commentPath)
                                     ? commentPath
-                                    : blogPath.replace(PublickConstants.BLOG_PATH, PublickConstants.COMMENTS_PATH);
+                                    : blogPath.replace(CMSConstants.BLOG_PATH, CMSConstants.COMMENTS_PATH);
 
                 JcrResourceUtil.createPath(parentPath, JcrResourceConstants.NT_SLING_ORDERED_FOLDER,
                         JcrResourceConstants.NT_SLING_ORDERED_FOLDER, resolver.adaptTo(Session.class), true);
@@ -127,7 +128,7 @@ public class CommentServlet extends SlingAllMethodsServlet {
                 Map<String, Object> properties = new HashMap<String, Object>();
                 properties.put(AUTHOR_PARAMETER, author);
                 properties.put(COMMENT_PARAMETER, comment);
-                properties.put(JcrConstants.JCR_PRIMARYTYPE, PublickConstants.NODE_TYPE_COMMENT);
+                properties.put(JcrConstants.JCR_PRIMARYTYPE, CMSConstants.NODE_TYPE_COMMENT);
 
                 resolver.create(resolver.getResource(parentPath), nodeName, properties);
                 resolver.commit();

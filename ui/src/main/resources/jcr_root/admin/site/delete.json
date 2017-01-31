@@ -1,0 +1,15 @@
+{
+    "jcr:primaryType": "cms:page",
+    "sling:resourceType" : "cms/pages/adminSecurePage",
+    "title" : "Delete Site",
+    "jcr:content" : {
+        "mainContent" : {
+            "jcr:primaryType": "nt:unstructured",
+            "sling:resourceType" : "cms/components/foundation/parsys",
+            "siteEdit" : {
+                "jcr:primaryType": "nt:unstructured",
+                "sling:resourceType" : "cms/components/admin/siteDelete"
+            }
+        }
+    }
+}
